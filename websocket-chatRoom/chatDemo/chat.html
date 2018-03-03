@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel="stylesheet" href="./style.css">
+    <link rel="stylesheet" href="http://at.alicdn.com/t/font_569535_vnvco68y9m9m5cdi.css">
+    <style>
+        .iconfont {
+            font-family: "iconfont" !important;
+            font-size: 16px;
+            font-style: normal;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        .icon-fanhui:before {
+            content: "\e669";
+        }
+    </style>
+</head>
+
+<body>
+    <div class="sign" id="sign">
+        <h2>请输入你的名字</h2>
+        <input type="text" id="name">
+        <button id="btn_sign">OK</button>
+    </div>
+    <div class="blackboard" id="blackboard">
+        <div class="header">
+            <h2>聊天室测试</h2>
+            <div>
+                <span>当前在线人数:</span>
+                <span id="peopleNum"></span>
+            </div>
+        </div>
+        <div class="content" id="content">
+
+        </div>
+        <div class="footer">
+            <textarea id="msg" placeholder="等待输入..."></textarea>
+            <button id="btn_close">
+                <i class="iconfont icon-fanhui"></i>
+            </button>
+            <button id="btn_msg">发送</button>
+        </div>
+    </div>
+</body>
+<script>
+    var ws = new WebSocket('ws://localhost:2333');
+
+    document.getElementById('btn_sign').onclick = function () {
+        var name = document.getElementById('name');
+        var _name = '';
+        if (name.value.trim()) {
+            _name = name.value.trim();
+            document.getElementById('sign').style.display = "none";
+            document.getElementById('blackboard').style.display = "block";
+            name.value = '';
+            ws.send(JSON.stringify({name:_name,type:"setname"}));
+        } else {
+            alert('输入你的名字...')
+        }
+    }
+/* 聊天逻辑开始 ========================================= */   
+    var btn_msg = document.getElementById('btn_msg');
+    ws.onopen = function () {
+        btn_msg.onclick = function () {
+            var msg = document.getElementById('msg');
+            if (msg.value === '') return // console.log('不能发送空内容!!!');
+            ws.send(JSON.stringify({text:msg.value.trim(),type:"chat"}));
+            msg.value = '';
+        }
+    };
+
+    var content = document.getElementById('content');
+    ws.onmessage = function (e) {
+        var div = document.createElement('div');      
+        var data = JSON.parse(e.data);
+        document.getElementById('peopleNum').innerHTML = data.peopleNum;
+
+        switch(data.type){
+            case 'info':
+                div.setAttribute("class","con_header");
+                div.innerHTML = data.info;
+            break;
+            case 'chat':
+                div.setAttribute("class","con_text");
+                div.innerHTML = data.name +":"+ data.text;
+            break;
+            default:
+                div.setAttribute("class","con_header");
+                div.innerHTML = data.leaveInfo;
+            break;
+        }
+        content.appendChild(div);
+    }
+
+    document.getElementById('btn_close').onclick = function () {
+        document.getElementById('blackboard').style.display = "none";
+        document.getElementById('sign').style.display = "block";
+    }
+</script>
+
+</html>

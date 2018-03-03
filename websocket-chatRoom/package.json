@@ -1,0 +1,15 @@
+{
+  "name": "websocket-chatRoom",
+  "version": "1.0.0",
+  "description": "- npm i nrm -g\r  - 查看 nrm ls\r  - 使用 nrm use name\r ## npm install nodejs-websocket --save",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "nodejs-websocket": "^1.7.1"
+  }
+}

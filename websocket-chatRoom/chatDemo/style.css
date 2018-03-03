@@ -1,0 +1,92 @@
+*{margin:0; padding:0;}
+input,
+button,
+textarea{background:none; outline:none; border:0px;}  
+
+.sign{
+    width: 250px;
+    height: 100px;
+    margin: auto;
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    top: 0;
+}
+#name{
+    width: 180px;
+    height: 40px;
+    font-size: 30px;
+    box-sizing: border-box;          
+}
+#btn_sign{height: 40px; width:40px;vertical-align:top;}
+.blackboard{
+    display: none;
+    width: 500px;
+    height: 800px;
+    background:url('https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1520075802184&di=58632215e1c99bc5411f5b4576f2e8ef&imgtype=0&src=http%3A%2F%2Fi0.hdslb.com%2Fbfs%2Farchive%2F10a31a4c4eb3d2683d64159a42e66d0d79675a99.jpg') no-repeat top center;
+    position: relative;
+}
+.header{
+    width: 100%;
+    height: 110px;
+}
+
+.content{
+    width: 100%;
+    height: 540px;
+    background-color: rgba(255,255,255,0.3);
+    overflow: auto; 
+    padding: 10px; 
+    box-sizing: border-box;
+}
+
+.content .con_header{
+    width: 100%;
+    font-size: 16px;
+    text-align: center;
+}
+.content .con_text{
+    width: 100%;
+    font-size: 20px;
+}
+.content .text_right{
+    text-align: right;
+}
+.footer{
+    width: 100%;
+    height: 150px;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+}
+.footer #msg{
+    resize:none;
+    overflow:visible;
+    width: 100%;
+    height: 100px;
+    background-color: rgba(0,0,0,0.4);
+    color: #fff;
+    padding: 10px;
+    box-sizing: border-box;
+    font-size: 18px;
+}
+.footer button{
+    width: 80px;
+    height: 34px;
+    position: absolute;
+}
+.footer #btn_close{
+    left: 8px;
+    bottom: 8px;
+    width: 34px;
+    border-radius: 50%;
+    background-color:#fff;
+    font-size: 20px;
+}
+.footer #btn_msg{
+    right: 8px;
+    bottom: 8px;
+    background-color:#fff;
+    font-size: 20px;
+}
